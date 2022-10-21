@@ -22,7 +22,7 @@ class QuestionView extends Component {
 
   getQuestions = () => {
     $.ajax({
-      url: `/api/v1/questions?page=${this.state.page}`, //TODO: update request URL
+      url: `/api/v1/questions?page=${this.state.page}`,
       type: 'GET',
       success: (result) => {
         this.setState({
@@ -84,7 +84,7 @@ class QuestionView extends Component {
 
   submitSearch = (searchTerm) => {
     $.ajax({
-      url: `/api/v1/questions`, //TODO: update request URL
+      url: `/api/v1/questions/search`, //TODO: update request URL
       type: 'POST',
       dataType: 'json',
       contentType: 'application/json',
@@ -102,7 +102,7 @@ class QuestionView extends Component {
         return;
       },
       error: (error) => {
-        alert('Unable to try load questions. Please try your request again');
+        alert('Unable to load questions. Please try your request again');
         return;
       },
     });
@@ -112,7 +112,7 @@ class QuestionView extends Component {
     if (action === 'DELETE') {
       if (window.confirm('are you sure you want to delete the question?')) {
         $.ajax({
-          url: `/questions/${id}`, //TODO: update request URL
+          url: `/api/v1/questions/${id}`, //TODO: update request URL
           type: 'DELETE',
           success: (result) => {
             this.getQuestions();

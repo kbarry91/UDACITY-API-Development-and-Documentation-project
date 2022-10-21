@@ -10,7 +10,7 @@ QUESTIONS_PER_PAGE = 10
 
 
 def create_app(test_config=None):
-    print("HELLO TRIVIA!!!")
+    print("Launching Trivia Quiz App !!!")
     # create and configure the app
     app = Flask(__name__)
     setup_db(app)
@@ -93,6 +93,8 @@ def create_app(test_config=None):
                 "current_category": None,                
 
             })
+
+   
     """
     @TODO:
     TEST: When you click the trash icon next to a question, the question will be removed.
@@ -105,27 +107,51 @@ def create_app(test_config=None):
         """
         try:
             question = Question.query.filter(Question.id == question_id).one_or_none()         
-            print(question)
-            #categories = Category.query.order_by(Category.type).all()
-            #formatted_categories = {category.id: category.type for category in categories}
-            #if len(categories) == 0:
-            #    abort(404)
+            
+            # Confirm Question exists
+            if question is None:
+                abort(404)
+
+            Question.delete(question)
+          
             return jsonify(
                 {
                     "success": True,
                 })
         except Exception:
             abort(422)  
+
     """
     @TODO:
-    Create an endpoint to POST a new question,
-    which will require the question and answer text,
-    category, and difficulty score.
-
     TEST: When you submit a question on the "Add" tab,
     the form will clear and the question will appear at the end of the last page
     of the questions list in the "List" tab.
     """
+    @app.route('/api/v1/questions',methods=['POST'])
+    def add_question():
+        """
+        POST endpoint to add a new question
+        """    
+        # Get question data from request.
+        question = request.get_json().get('question', None).strip()
+        answer = request.get_json().get('answer', None).strip()
+        difficulty = request.get_json().get('difficulty', None)
+        category = request.get_json().get('category', None)
+        
+        # Validate question data is populated 
+        if(len(question)==0 or len(answer)==0 or difficulty is None or category is None):
+            abort(422)
+
+        # Create new Question Object
+        new_question = Question(question,answer,category,difficulty)
+        
+        try:
+            questions = Question.insert(new_question)               
+            return jsonify({
+              'success': True,
+            })
+        except Exception:
+            abort(422)
 
     """
     @TODO:
@@ -133,7 +159,7 @@ def create_app(test_config=None):
     only question that include that string within their question.
     Try using the word "title" to start.
     """
-    @app.route('/api/v1/questions',methods=['POST'])
+    @app.route('/api/v1/questions/search',methods=['POST'])
     def retrieve_questions_by_search():
         """
         POST endpoint to search questions based on a search term  

@@ -39,9 +39,9 @@ After you complete your endpoints, ensure you return to the frontend to confirm 
 - Endpoints defined as expected by the frontend
 - Response body provided as expected by the frontend
 
-### Optional: Updating Endpoints and API behavior
+### Optional: Updating Endpoints and API behaviour
 
-Would you rather the API had different behavior - different endpoints, return the response body in a different format? Go for it! Make the updates to your API and the corresponding updates to the frontend so it works with your API seamlessly.
+Would you rather the API had different behaviour - different endpoints, return the response body in a different format? Go for it! Make the updates to your API and the corresponding updates to the frontend so it works with your API seamlessly.
 
 ### Optional: Styling
 
@@ -51,9 +51,9 @@ In addition, you may want to customize and style the frontend by editing the CSS
 
 Currently, when a user plays the game they play up to five questions of the chosen category. If there are fewer than five questions in a category, the game will end when there are no more questions in that category.
 
-You can optionally update this game play to increase the number of questions or whatever other game mechanics you decide. Make sure to specify the new mechanics of the game in the README of the repo you submit so the reviewers are aware that the behavior is correct.
+You can optionally update this game play to increase the number of questions or whatever other game mechanics you decide. Make sure to specify the new mechanics of the game in the README of the repo you submit so the reviewers are aware that the behaviour is correct.
 
-> **Spoiler Alert:** If needed, there are details below regarding the expected endpoints and behavior. But, ONLY look at them if necessary. Give yourself the opportunity to practice understanding code first!
+> **Spoiler Alert:** If needed, there are details below regarding the expected endpoints and behaviour. But, ONLY look at them if necessary. Give yourself the opportunity to practice understanding code first!
 
 ---
 
@@ -61,9 +61,9 @@ You can optionally update this game play to increase the number of questions or 
 
 ## DO NOT PROCEED: ENDPOINT SPOILERS
 
-> Only read the below to confirm your notes regarding the expected API endpoint behavior based on reading the frontend codebase.
+> Only read the below to confirm your notes regarding the expected API endpoint behaviour based on reading the frontend codebase.
 
-### Expected endpoints and behaviors
+### Expected endpoints and behaviours
 
 `GET '/categories'`
 
@@ -120,7 +120,7 @@ You can optionally update this game play to increase the number of questions or 
 
 `GET '/categories/${id}/questions'`
 
-- Fetches questions for a cateogry specified by id request argument
+- Fetches questions for a category specified by id request argument
 - Request Arguments: `id` - integer
 - Returns: An object with questions for the specified category, total questions, and current category string
 

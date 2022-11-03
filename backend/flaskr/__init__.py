@@ -156,7 +156,7 @@ def create_app(test_config=None):
             search_term = request.get_json().get('searchTerm', None).strip()
         except:
             abort(400)
-
+       
         try:
             questions = Question.query \
                 .order_by(Question.id) \
@@ -177,6 +177,7 @@ def create_app(test_config=None):
                 abort(400)
             else:
                 abort(422)
+           
 
     @app.route('/api/v1/categories/<int:category_id>/questions', methods=['GET'])
     def retrieve_questions_by_category(category_id):

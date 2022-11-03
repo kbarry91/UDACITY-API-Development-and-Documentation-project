@@ -67,19 +67,17 @@ One note before you delve into your tasks: for each endpoint, you are expected t
 8. Create a `POST` endpoint to get questions to play the quiz. This endpoint should take a category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions.
 9. Create error handlers for all expected errors including 400, 404, 422, and 500.
 
-## API Reference
+## Documenting your Endpoints
 
-### Getting Started
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, `http://127.0.0.1:5000/`, which is set as a proxy in the frontend configuration. 
-- Authentication: This version of the application does not require authentication or API keys. 
+You will need to provide detailed documentation of your API endpoints including the URL, request parameters, and the response body. Use the example below as a reference.
 
-#### `GET '/api/v1.0/categories'`
+### Documentation Example
+
+`GET '/api/v1.0/categories'`
 
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, `categories`, that contains an object of `id: category_string` key: value pairs.
-
--example  `curl http://127.0.0.1:5000/books?page=3 -X POST -H "Content-Type: application/json" -d '{"title":"Neverwhere", "author":"Neil Gaiman", "rating":"5"}'`
 
 ```json
 {
@@ -89,55 +87,6 @@ One note before you delve into your tasks: for each endpoint, you are expected t
   "4": "History",
   "5": "Entertainment",
   "6": "Sports"
-}
-```
-
-#### GET `/api/v1.0/questions`
-
-- Fetches:
-  - A list of questions that are paginated by 10 items
-- Request Arguments:
-  'page'(int) -  current page
-- Returns: An object with these keys:
-  - `success`: The success flag
-  - `questions`: A list of questions (paginated by 10 items)
-  - `categories`: A dictionary of categories
-  - `total_questions`: The total of questions
-  - `current_category`: The current category
-
-- example 
-
- `curl http://127.0.0.1:5000/questions?page=1 -X GET -H "Content-Type: application/json" -d '{"title":"Neverwhere", "author":"Neil Gaiman", "rating":"5"}'`
-
-```json
-{
-  "categories": {
-    "1": "Science", 
-    "2": "Art", 
-    "3": "Geography", 
-    "4": "History", 
-    "5": "Entertainment", 
-    "6": "Sports"
-  }, 
-  "current_category": null, 
-  "success": true, 
-  "total_questions": 19,
-  "questions": [
-    {
-      "answer": "Agra", 
-      "category": 3, 
-      "difficulty": 2, 
-      "id": 15, 
-      "question": "The Taj Mahal is located in which Indian city?"
-    }, 
-    {
-      "answer": "Escher", 
-      "category": 2, 
-      "difficulty": 1, 
-      "id": 16, 
-      "question": "Which Dutch graphic artist\u2013initials M C was a creator of optical illusions?"
-    }
-  ]
 }
 ```
 

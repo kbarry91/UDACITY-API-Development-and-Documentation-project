@@ -16,9 +16,6 @@ def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
 
-    """
-    @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-    """
     CORS(app, resources={r"/api/v1*": {"origins": "*"}})
 
     @app.after_request
@@ -156,7 +153,7 @@ def create_app(test_config=None):
             search_term = request.get_json().get('searchTerm', None).strip()
         except:
             abort(400)
-       
+
         try:
             questions = Question.query \
                 .order_by(Question.id) \
@@ -177,7 +174,6 @@ def create_app(test_config=None):
                 abort(400)
             else:
                 abort(422)
-           
 
     @app.route('/api/v1/categories/<int:category_id>/questions', methods=['GET'])
     def retrieve_questions_by_category(category_id):
@@ -202,7 +198,6 @@ def create_app(test_config=None):
                     "questions": formatted_questions,
                     "total_questions": questions.total,
                     "current_category": category_id,
-
                 })
 
         except Exception as e:
@@ -258,7 +253,6 @@ def create_app(test_config=None):
                 })
 
         except Exception:
-            print("failed")
             abort(422)
 
     @app.errorhandler(404)

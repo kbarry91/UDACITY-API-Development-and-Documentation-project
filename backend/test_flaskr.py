@@ -21,18 +21,8 @@ class TriviaTestCase(unittest.TestCase):
         self.DB_HOST = os.environ.get('DB_HOST')
         self.DB_PORT = os.environ.get('DB_PORT')
         self.DB_PATH = "postgres://{}:{}@{}:{}/{}".format(
-        self.DB_USER, self.DB_PASSWORD, self.DB_HOST, self.DB_PORT, self.DB_NAME)
-       
+            self.DB_USER, self.DB_PASSWORD, self.DB_HOST, self.DB_PORT, self.DB_NAME)
 
-
-
-        #self.database_name = "trivia_test"
-        #self.user = "postgres"
-        #password = 'postgres'
-        #self.host = 'localhost'
-        #self.port = '5432'
-        #self.database_path = "postgres://{}:{}@{}:{}/{}".format(
-        #    self.user, password, self.host, self.port, self.database_name)
         setup_db(self.app, self.DB_PATH)
 
         # Test Data

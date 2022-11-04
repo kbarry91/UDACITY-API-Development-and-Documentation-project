@@ -49,7 +49,8 @@ def create_app(test_config=None):
     def retrieve_questions():
         """
         GET endpoint to retrieve all questions paginated by 10 pages.
-        Returns: a list of questions, number of total questions, current category and categories.
+        Returns: a list of questions, number of total questions,
+        current category and categories.
         """
         try:
             page = request.args.get('page', 1, type=int)
@@ -116,11 +117,14 @@ def create_app(test_config=None):
             new_answer = request.get_json().get('answer', None).strip()
             new_difficulty = request.get_json().get('difficulty', None)
             new_category = request.get_json().get('category', None)
-        except:
+        except Exception as e:
             abort(400)
 
         # Validate question data is populated.
-        if (len(new_question) == 0 or len(new_answer) == 0 or new_difficulty is None or new_category is None):
+        if (len(new_question) == 0 or
+            len(new_answer) == 0 or
+            new_difficulty is None or
+                new_category is None):
             abort(400)
 
         # Create new Question Object.
@@ -146,12 +150,14 @@ def create_app(test_config=None):
     def retrieve_questions_by_search():
         """
         POST endpoint to search questions based on a search term.
-        Returns: A list of questions, total number of questions and current category.
+        Returns: A list of questions,
+        total number of questions and current category.
         """
         try:
-            # Get search_term from request body and trim leading and trailing whitespace
+            # Get search_term from request body
+            # and trim leading and trailing whitespace
             search_term = request.get_json().get('searchTerm', None).strip()
-        except:
+        except Exception as e:
             abort(400)
 
         try:
@@ -175,17 +181,23 @@ def create_app(test_config=None):
             else:
                 abort(422)
 
-    @app.route('/api/v1/categories/<int:category_id>/questions', methods=['GET'])
+    @app.route('/api/v1/categories/<int:category_id>/questions',
+               methods=['GET'])
     def retrieve_questions_by_category(category_id):
         """
         GET endpoint to return questions based on a category_id parameter.
-        Returns: A list of questions, total number of questions and current category.
+        Returns: A list of questions,
+        total number of questions
+        and current category.
         """
         try:
             page = request.args.get('page', 1, type=int)
 
-            questions = Question.query.order_by(Question.id).filter(
-                Question.category == category_id).paginate(page=page, per_page=QUESTIONS_PER_PAGE)
+            questions = Question.query.order_by(
+                Question.id).filter(
+                Question.category == category_id).paginate(
+                page=page, per_page=QUESTIONS_PER_PAGE)
+
             formatted_questions = [question.format()
                                    for question in questions.items]
 
@@ -209,7 +221,8 @@ def create_app(test_config=None):
     @app.route('/api/v1/quizzes', methods=['POST'])
     def play_quiz():
         """
-        POST endpoint to play quiz.Takes a category and previous question parameters.
+        POST endpoint to play quiz.
+        Takes a category and previous question parameters.
         Returns: next random question to be played for the quiz.
         """
         try:
@@ -236,7 +249,8 @@ def create_app(test_config=None):
 
             # Remove previous questions.
             valid_question_ids = [
-                question for question in all_question_ids if question not in previous_qs]
+                question for question in all_question_ids
+                if question not in previous_qs]
 
             if (len(valid_question_ids) == 0):
                 return jsonify({

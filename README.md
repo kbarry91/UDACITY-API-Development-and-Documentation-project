@@ -18,6 +18,9 @@ That's where you come in! Help them finish the trivia app so they can start hold
 
 Completing this trivia app will give you the ability to structure plan, implement, and test an API - skills essential for enabling your future applications to communicate with others.
 
+### Styling
+The code in this repo adheres to the  PEP8 - Style Guide for Python Code and has been checked using pycodestyle. 
+
 ## Frontend
 
 The [frontend](./frontend/README.md) directory contains a complete React frontend to consume the data from the Flask server. 

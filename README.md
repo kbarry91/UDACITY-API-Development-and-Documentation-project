@@ -59,6 +59,17 @@ psql trivia < trivia.psql
 ```
 
 ### Run the flask Server
+
+Secrets are stored as environment variables on your local machine and must be imported using `os.eniron.get('EXPECTED_ENV_VAR')`. To set the environment variables on Windows:
+(NB. Replace `postgres_user` and `postgres_password` with your user name and password)
+```bash
+export DB_NAME=trivia
+export DB_USER=postgres_user
+export DB_PASSWORD=postgres_password
+export DB_HOST=localhost
+export DB_PORT=5432
+```
+
 To run the app on a Windows machine:
 ```bash
 $ export FLASK_APP=flaskr
@@ -79,9 +90,21 @@ dropdb trivia_test
 createdb trivia_test
 psql trivia_test < trivia.psql
 ```
+### Set up Test Database environment variables
+ To set the environment variables on Windows:
+(NB. Replace `postgres_user` and `postgres_password` with your user name and password)
+```bash
+export DB_NAME=trivia_test
+export DB_USER=postgres_user
+export DB_PASSWORD=postgres_password
+export DB_HOST=localhost
+export DB_PORT=5432
+```
 
 ### To Run the testing suite
 The testing suite is located in the test_flaskr.py file.
+
+
 To run the tests navigate to the backend directory and enter :
 
 ```bash
